@@ -4,9 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorView {
+    final static String END = "Finish";
+
     ArrayList<Product> products = new ArrayList<>();
     int guests;
-    final static String END = "Finish";
 
     public void run() {
         sayHello();
@@ -21,16 +22,16 @@ public class CalculatorView {
 
 
     public void inputGuests() {
+        Scanner scanner = new Scanner(System.in);
         do {
-            Scanner scanner = new Scanner(System.in);
-            try {
+            if (scanner.hasNextInt()) {
                 guests = scanner.nextInt();
                 if (guests == 1) {
                     System.out.println("Did you come alone? Then you don't need to count anything! :)");
                 } else if (guests <= 0) {
                     System.out.println("Enter the correct value.");
                 }
-            } catch (Exception e) {
+            } else {
                 System.out.println("Wrong Input. Repeat please !");
             }
         }
@@ -41,8 +42,8 @@ public class CalculatorView {
         Pattern numberPattern = Pattern.compile("(\\s-?\\d+\\.?\\d*)");
         String inputValue;
         Product product;
+        Scanner in = new Scanner(System.in);
         do {
-            Scanner in = new Scanner(System.in);
             System.out.println("Please write the name of the product and its cost in format {name} {price}. Example: Test 12.50");
             inputValue = in.nextLine();
             try {
